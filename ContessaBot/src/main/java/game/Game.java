@@ -1,14 +1,15 @@
-package main;
+package game;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import discord4j.core.object.entity.Member;
 
-public class Game {
+public abstract class Game {
 
 	private String gameName;
-	private List<Member> players = new ArrayList<Member>();
+	@SuppressWarnings("unused")
+	private List<Player> players = new ArrayList<Player>();
 	
 	public String getName() {
 		return gameName;
@@ -18,9 +19,5 @@ public class Game {
 		this.gameName = gameName;
 	}
 	
-	public boolean addPlayer(Member player) {
-		players.add(player);
-		return true;
-		//TODO handling adding existing player
-	}
+	public abstract boolean addPlayer(Member player);
 }

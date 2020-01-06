@@ -3,7 +3,8 @@ package coup;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Game;
+import discord4j.core.object.entity.Member;
+import game.Game;
 
 public class CoupGame extends Game {
 	
@@ -12,11 +13,17 @@ public class CoupGame extends Game {
 	public CoupGame() {
 		this.setName("Coup");
 		deck = new ArrayList<CoupCard>();
-		for(CoupCard type : CoupCard.values()) {
+		for(CoupCardType type : CoupCardType.values()) {
 			for(int i = 0; i < 3; i++) {
-				deck.add(type);
+				deck.add(new CoupCard(type));
 			}
 		}
+	}
+
+	@Override
+	public boolean addPlayer(Member player) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

@@ -12,11 +12,12 @@ import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
+import game.Game;
 
 public class Driver {
 	
 	// Constants
-	private static final String TOKEN = "token.properties";  
+	private static final String TOKEN = "src/main/resources/token.properties";  
 	private static final String PREFIX = "c!";  
 	
 	private static final Map<String, Command> cmds = new HashMap<String, Command>();
@@ -28,6 +29,7 @@ public class Driver {
 			
 			String[] args = event.getMessage().getContent().get().split(" ");
 			// Send a general message to the channel.
+			
 			event.getMessage().getChannel().block().createMessage(Messages.getString("Message.HelpNotif")).block();  
 			
 			if(args.length == 1) { // No parameter, send default help message.
@@ -46,7 +48,7 @@ public class Driver {
 		cmds.put("coup", event -> {
 			String[] args = event.getMessage().getContent().get().split(" ");
 			if(args.length == 1) { // No parameter, send default invalid input message.
-				event.getMessage().getChannel().block().createMessage(Messages.getString("Message.CoupInvalid")).block();
+				event.getMessage().getChannel().block().createMessage(Messages.getString("Message.CoupInvalidCommand")).block();
 			}
 			else {
 				switch(args[1]) {
