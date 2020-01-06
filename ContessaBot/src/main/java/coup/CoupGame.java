@@ -3,7 +3,7 @@ package coup;
 import java.util.ArrayList;
 import java.util.List;
 
-import ContessaBot.Game;
+import main.Game;
 
 public class CoupGame extends Game {
 	

@@ -1,4 +1,4 @@
-package ContessaBot;
+package main;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
