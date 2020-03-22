@@ -9,7 +9,7 @@ public abstract class Game {
 
 	private String gameName;
 	@SuppressWarnings("unused")
-	private List<Player> players = new ArrayList<Player>();
+	protected List<Player> players = new ArrayList<Player>();
 	
 	public String getName() {
 		return gameName;
@@ -20,4 +20,8 @@ public abstract class Game {
 	}
 	
 	public abstract boolean addPlayer(Member player);
+	
+	public String listPlayers() {
+		for()
+	}
 }

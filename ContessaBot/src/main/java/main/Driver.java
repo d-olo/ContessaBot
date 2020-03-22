@@ -14,17 +14,23 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
 import game.Game;
 
+/**
+ * This class starts the bot and manages all information being received and sent from Discord.
+ * @author Dionel Olo
+ */
 public class Driver {
 	
 	// Constants
 	private static final String TOKEN = "src/main/resources/token.properties";  
 	private static final String PREFIX = "c!";  
 	
+	// Static fields
 	private static final Map<String, Command> cmds = new HashMap<String, Command>();
 	private static final Map<MessageChannel, Game> games = new HashMap<MessageChannel, Game>();
 	
 	// Add new commands to static block.
 	static {
+		// Help command: send a help message to DMs of sending Member.
 		cmds.put("help", event -> {  
 			
 			String[] args = event.getMessage().getContent().get().split(" ");
@@ -71,7 +77,12 @@ public class Driver {
 						msg = Messages.getString("Message.IncorrectGame") + currentGame.getName() + "!";
 					}
 					else {
-						currentGame.addPlayer(event.getMember().get());
+						if(currentGame.addPlayer(event.getMember().get())) { // Player successfully added
+							currentChannel.createMessage(event.getMember().get().getMention() + " " + Messages.getString("Message.PlayerAdded") + currentGame.getName() + "!").block();
+						}
+						else { // Player already exists in game
+							currentChannel.createMessage(event.getMember().get().getMention() + " " + Messages.getString("Message.PlayerInGame") + currentGame.getName() + "!").block();
+						}
 					}
 					break;
 				default:
